@@ -17,3 +17,7 @@ setopt hist_find_no_dups
 # Key bindings
 bindkey ';3A' history-search-backward
 bindkey ';3B' history-search-forward
+
+# Vs code terminal compatibility
+bindkey ';5A' history-search-backward
+bindkey ';5B' history-search-forward
