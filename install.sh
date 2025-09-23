@@ -92,6 +92,25 @@ install_pyenv() {
     fi
 }
 
+# Function to install FiraCode Nerd Font
+install_firacode_font() {
+    # Check if FiraCode Nerd Font is already installed
+    if ls ~/Library/Fonts/*FiraCode* &> /dev/null || ls /Library/Fonts/*FiraCode* &> /dev/null; then
+        echo "✅ FiraCode Nerd Font already installed"
+        return
+    fi
+    
+    echo "🔤 Installing FiraCode Nerd Font..."
+    
+    # Add the nerd-fonts tap if not already added
+    brew tap homebrew/cask-fonts 2>/dev/null || true
+    
+    # Install FiraCode Nerd Font
+    brew install --cask font-fira-code-nerd-font
+    
+    echo "✅ FiraCode Nerd Font installed"
+}
+
 # Function to set up symlinks for config files
 setup_config_symlinks() {
     echo "🔗 Setting up config file symlinks..."
@@ -130,6 +149,7 @@ main() {
     install_sdkman
     install_nvm
     install_pyenv
+    install_firacode_font
     
     # Set up configuration symlinks
     setup_config_symlinks

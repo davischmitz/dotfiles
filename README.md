@@ -43,6 +43,7 @@ The `install.sh` script will install:
 - **Homebrew** (macOS package manager)
 - **CLI Tools**: fzf, starship, eza, k9s, zoxide, pipenv, lazydocker, carapace
 - **Development Tools**: SDKMAN, NVM, pyenv
+- **Font**: FiraCode Nerd Font (perfect for development with icon support)
 - **Configuration**: Symlinks your config files to the appropriate locations
 
 ## Features

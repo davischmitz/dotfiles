@@ -22,13 +22,36 @@ zinit light zsh-users/zsh-autosuggestions
 # LOAD MODULAR CONFIGURATIONS
 # =============================================================================
 
-# Get the directory where this .zshrc file is located
-ZSHRC_DIR="$(cd "$(dirname "${(%):-%N}")" && pwd)"
+# Get the directory where this .zshrc file is located (resolve symlinks)
+ZSHRC_FILE="${(%):-%N}"
+if [[ -L "$ZSHRC_FILE" ]]; then
+    # If it's a symlink, get the actual file path
+    ZSHRC_DIR="$(cd "$(dirname "$(readlink "$ZSHRC_FILE")")" && pwd)"
+else
+    # If it's not a symlink, get the directory normally
+    ZSHRC_DIR="$(cd "$(dirname "$ZSHRC_FILE")" && pwd)"
+fi
 
 # Source modular configuration files
 source "$ZSHRC_DIR/aliases.zsh"
 source "$ZSHRC_DIR/history.zsh"
 source "$ZSHRC_DIR/completions.zsh"
+
+# =============================================================================
+# CONVENIENCE FUNCTIONS
+# =============================================================================
+
+# Function to re-run dotfiles setup
+dotfiles-setup() {
+    local dotfiles_dir="$(cd "$ZSHRC_DIR/.." && pwd)"
+    if [[ -f "$dotfiles_dir/install.sh" ]]; then
+        echo "🔄 Running dotfiles setup from $dotfiles_dir..."
+        "$dotfiles_dir/install.sh"
+    else
+        echo "❌ Could not find install.sh in $dotfiles_dir"
+        return 1
+    fi
+}
 
 # =============================================================================
 # TOOL INITIALIZATIONS
@@ -44,7 +67,7 @@ if command -v starship &> /dev/null; then
     eval "$(starship init zsh)"
 fi
 
-# Carapace
+# Carapace (load after completions are initialized)
 if command -v carapace &> /dev/null; then
     source <(carapace _carapace)
 fi
