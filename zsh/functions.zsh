@@ -30,10 +30,5 @@ update-kubeconfig() {
     
     echo "✅ Updated KUBECONFIG with ${#configs[@]} config(s):"
     printf "   - %s\n" "${configs[@]}"
-    
-    # Source zshrc
-    echo "🔄 Reloading zshrc..."
-    source ~/.zshrc
-    
     echo "✅ Done!"
 }

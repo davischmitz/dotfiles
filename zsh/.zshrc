@@ -2,7 +2,6 @@
 # ENVIRONMENT VARIABLES
 # =============================================================================
 
-export KUBECONFIG="$HOME/.kube/kubeconfig.yaml:$HOME/.kube/devconhos-mcp-app-foundation.yaml:$HOME/.kube/kubeconfig-usrv.yaml"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$HOME/hdlfscli/bin:$PATH"
 
 # =============================================================================
@@ -33,7 +32,6 @@ else
 fi
 
 # Source modular configuration files
-source "$ZSHRC_DIR/functions.zsh"
 source "$ZSHRC_DIR/aliases.zsh"
 source "$ZSHRC_DIR/history.zsh"
 source "$ZSHRC_DIR/completions.zsh"
@@ -57,6 +55,18 @@ dotfiles-setup() {
 # =============================================================================
 # TOOL INITIALIZATIONS
 # =============================================================================
+
+# Auto-initialize KUBECONFIG with all configs from ~/.kube
+if [[ -d "$HOME/.kube" ]]; then
+    local configs=()
+    while IFS= read -r file; do
+        configs+=("$file")
+    done < <(find "$HOME/.kube" -maxdepth 1 -type f \( -name "*.yaml" -o -name "*.yml" \) 2>/dev/null | sort)
+    
+    if [[ ${#configs[@]} -gt 0 ]]; then
+        export KUBECONFIG="${(j.:.)configs}"
+    fi
+fi
 
 # FZF
 if command -v fzf &> /dev/null; then
