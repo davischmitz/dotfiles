@@ -2,7 +2,7 @@
 # ENVIRONMENT VARIABLES
 # =============================================================================
 
-export KUBECONFIG="$HOME/.kube/kubeconfig.yaml:$HOME/.kube/dev-mcp-app-foundation.yaml:$HOME/.kube/test-mcp-app-foundation.yaml"
+export KUBECONFIG="$HOME/.kube/kubeconfig.yaml:$HOME/.kube/devconhos-mcp-app-foundation.yaml:$HOME/.kube/kubeconfig-usrv.yaml"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$HOME/hdlfscli/bin:$PATH"
 
 # =============================================================================
@@ -33,6 +33,7 @@ else
 fi
 
 # Source modular configuration files
+source "$ZSHRC_DIR/functions.zsh"
 source "$ZSHRC_DIR/aliases.zsh"
 source "$ZSHRC_DIR/history.zsh"
 source "$ZSHRC_DIR/completions.zsh"
