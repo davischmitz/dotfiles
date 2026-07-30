@@ -8,3 +8,4 @@ alias ls='eza -al --color=always --group-directories-first --icons' # preferred 
 alias la='eza -a --color=always --group-directories-first --icons'  # all files and dirs
 alias ll='eza -l --color=always --group-directories-first --icons'  # long format
 alias lt='eza -aT --color=always --group-directories-first --icons' # tree listing
+alias dns-reset='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
