@@ -33,7 +33,7 @@ install_brew_packages() {
     local packages=(
         "fzf"
         "starship"
-        "carapace-sh/carapace/carapace"
+        "carapace"
         "eza"
         "k9s"
         "zoxide"
