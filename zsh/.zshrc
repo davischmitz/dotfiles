@@ -2,7 +2,7 @@
 # ENVIRONMENT VARIABLES
 # =============================================================================
 
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$HOME/hdlfscli/bin:$PATH"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # =============================================================================
 # ZINIT SETUP
